@@ -11,7 +11,7 @@ namespace Cat.State
             base.StateEnter();
             Debug.Log("Enter Front State.");
             
-            catAnimator.PlaySpriteAnimation(CatAnimator.CATDIRECTION_FRONT_ID);
+            catAnimator.PlaySpriteStateAnimation(CatAnimator.CATDIRECTION_FRONT_ID);
         }
     }
 }

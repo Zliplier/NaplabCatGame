@@ -123,5 +123,37 @@ namespace Zlipacket.CoreZlipacket.Tools
         {
             return RadianToVector2(degree * Mathf.Deg2Rad) * length;
         }
+        
+        public static List<T> GetRandomSubset<T>(this List<T> sourceList, int amountToPick)
+        {
+            // 1. Create a working copy of the original list to avoid modifying it.
+            List<T> workingList = new List<T>(sourceList);
+            List<T> randomSubset = new List<T>();
+
+            // 2. Ensure we don't try to pick more items than available in the list.
+            if (amountToPick > workingList.Count)
+            {
+                amountToPick = workingList.Count;
+            }
+
+            // 3. Loop until the desired amount of items is picked.
+            while (amountToPick > 0 && workingList.Count > 0)
+            {
+                // 4. Generate a random index within the current working list's range.
+                // Random.Range with ints is max-exclusive, so it works perfectly with list counts.
+                int randomIndex = Random.Range(0, workingList.Count);
+
+                // 5. Add the randomly selected item to the result list.
+                randomSubset.Add(workingList[randomIndex]);
+
+                // 6. Remove the selected item from the working list to prevent re-selection.
+                workingList.RemoveAt(randomIndex);
+
+                // 7. Decrement the counter.
+                amountToPick--;
+            }
+
+            return randomSubset;
+        }
     }
 }

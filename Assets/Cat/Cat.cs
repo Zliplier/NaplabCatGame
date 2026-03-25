@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Cat.Data;
+using Cat.Task;
 using General_Script.SceneScript;
 using General_Script.SceneScript.GameplayScene;
 using Player;
@@ -30,6 +31,8 @@ namespace Cat
 
         public void Rotate(bool isRight)
         {
+            if (CatTaskManager.Instance.isAllTasksCompleted) return;
+            
             int nextState = (int)stateMachine.states.SingleOrDefault(state => state.Value == stateMachine.currentState).Key +
                             (isRight ? 1 : -1);
 
@@ -40,11 +43,6 @@ namespace Cat
                 nextState = 0;
             
             stateMachine.ChangeToState((CatDirection)nextState);
-        }
-
-        private void OnDrawGizmos()
-        {
-            config.OnGizmosDraw();
         }
     }
 }

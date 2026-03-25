@@ -11,7 +11,7 @@ namespace Cat.State
             base.StateEnter();
             Debug.Log("Enter Left State.");
             
-            catAnimator.PlaySpriteAnimation(CatAnimator.CATDIRECTION_LEFT_ID);
+            catAnimator.PlaySpriteStateAnimation(CatAnimator.CATDIRECTION_LEFT_ID);
         }
     }
 }

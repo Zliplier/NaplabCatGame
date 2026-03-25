@@ -9,17 +9,12 @@ namespace Cat.Data
     public class SO_CatConfig : ScriptableObject
     {
         public CatData data;
-
-        public void OnGizmosDraw()
-        {
-            data.OnGizmosDraw();
-        }
     }
 
     [Serializable]
     public class CatData
     {
-        [Header("Bush Task Config")]
+        /*[Header("Bush Task Config")]
         public SerializableDictionary<CatDirection, BrushConfig> brushConfig;
         
         public void OnGizmosDraw()
@@ -28,10 +23,10 @@ namespace Cat.Data
             {
                 config.DrawDebug();
             }
-        }
+        }*/
     }
 
-    [Serializable]
+    /*[Serializable]
     public class BrushConfig
     {
         public Vector2Int brushNum;
@@ -59,7 +54,7 @@ namespace Cat.Data
                 Gizmos.DrawLineStrip(new ReadOnlySpan<Vector3>(points), true);
             }
         }
-    }
+    }*/
 
     [Serializable]
     public enum CatDirection

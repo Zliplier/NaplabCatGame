@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DG.Tweening;
 using Player;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Cat
     {
         //Sprite Animator
         [SerializeField] private Animator animator;
+        private Coroutine co_Animator;
+        public bool isSpriteAnimation => co_Animator != null;
         
         //Sprite Animation Id
         public static string CATDIRECTION_FRONT_ID = "CatFront";
@@ -25,8 +28,28 @@ namespace Cat
             PlayTweenAnimation(TwBobing());
         }
         
-        public void PlaySpriteAnimation(string animationID) => animator.Play(animationID);
+        public void PlaySpriteStateAnimation(string animationID)
+        {
+            animator.Play(animationID);
+        }
 
+        public void PlaySpriteAnimationOnce(string returnAnimationId, string animationID, float animationLength)
+        {
+            if (isSpriteAnimation)
+                co_Animator = null;
+            
+            animator.Play(animationID);
+            co_Animator = StartCoroutine(PlayingSpriteAnimation(returnAnimationId, animationLength));
+        }
+
+        public IEnumerator PlayingSpriteAnimation(string returnAnimationId, float animationLength)
+        {
+            yield return new WaitForSeconds(animationLength);
+            animator.Play(returnAnimationId);
+            
+            co_Animator = null;
+        }
+        
         public void PlayTweenAnimation(Tween animation)
         {
             if (isTweenAnimation)

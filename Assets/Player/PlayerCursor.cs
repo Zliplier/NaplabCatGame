@@ -16,6 +16,7 @@ namespace Player
         public UnityEvent onMouseUp;
         public UnityEvent onMouseDown;
         public UnityEvent onMouseUpdate;
+        public UnityEvent onMouseFixedUpdate;
         
         private void Start()
         {
@@ -29,10 +30,17 @@ namespace Player
             playerController.inputReader.playerInputMap.leftMouseUpEvent -= MouseUp;
         }
 
+        public void SetCursorSprite(Sprite sprite)
+        {
+            if (spriteRenderer == null) return;
+            
+            spriteRenderer.sprite = sprite;
+        }
+
         private void MouseDown()
         {
             isMouseDown = true;
-            spriteRenderer.enabled = true;
+            spriteRenderer.gameObject.SetActive(true);
             //Debug.Log("MouseDown");
             onMouseDown?.Invoke();
         }
@@ -40,7 +48,7 @@ namespace Player
         private void MouseUp()
         {
             isMouseDown = false;
-            spriteRenderer.enabled = false;
+            spriteRenderer.gameObject.SetActive(false);
             onMouseUp?.Invoke();
             //Debug.Log("MouseUp");
         }
@@ -55,6 +63,14 @@ namespace Player
             transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
             
             onMouseUpdate?.Invoke();
+        }
+
+        private void FixedUpdate()
+        {
+            if (!isMouseDown)
+                return;
+            
+            onMouseFixedUpdate?.Invoke();
         }
     }
 }

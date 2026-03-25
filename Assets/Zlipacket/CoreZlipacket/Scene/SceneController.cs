@@ -37,7 +37,7 @@ namespace Zlipacket.CoreZlipacket.Scene
 
         public void LoadSceneAsync(string sceneName)
         {
-            SceneManager.LoadSceneAsync(sceneName);
+            SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             Debug.Log("Scene" + sceneName + " loaded async.");
         }
 

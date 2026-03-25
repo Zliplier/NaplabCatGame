@@ -11,7 +11,12 @@ namespace General_Script.StateMachine
         [HideInInspector] public BaseState<Key> currentState;
         public SerializableDictionary<Key, BaseState<Key>> states;
 
-        private void Start()
+        public virtual void Awake()
+        {
+            
+        }
+
+        public virtual void Start()
         {
             ChangeToState(Enum.GetValues(typeof(Key)).Cast<Key>().ToArray()[0]);
         }

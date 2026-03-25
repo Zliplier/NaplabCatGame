@@ -11,7 +11,7 @@ namespace Cat.State
             base.StateEnter();
             Debug.Log("Enter Back State.");
             
-            catAnimator.PlaySpriteAnimation(CatAnimator.CATDIRECTION_BACK_ID);
+            catAnimator.PlaySpriteStateAnimation(CatAnimator.CATDIRECTION_BACK_ID);
         }
     }
 }
